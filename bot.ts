@@ -34,7 +34,7 @@ export default class Bottie{
         this.options = options
     }
 
-    handle(update : any){
+    async handle(update : any){
         this.offset = update.update_id+1
         update_types.forEach(type=>{
             if(type in update){
@@ -69,7 +69,7 @@ export default class Bottie{
         })
 
         return update
-        
+
     }
 
     private async poll(){
