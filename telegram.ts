@@ -14,9 +14,15 @@ export default class Telegram{
     }
 
     async Get(method : string, options? : any){
+        
         const url = new URL(`${this.endPoint}/${method}`);
         ( options && Object.keys(options).forEach(key => url.searchParams.append(key, options[key])) )
-        return await this.fetch(url)//.then((d:any)=>d.json()).then((d : any) => d.ok?d.result:console.error(d)).catch((err:any) => console.error(err));
+        return await this.fetch(url)
+        .then(async (d : any)=>{
+            // console.log(method, await d.clone().json());
+            return d
+        })
+        .catch((err : any)=>console.log(err)) //.then((d:any)=>d.json()).then((d : any) => d.ok?d.result:console.error(d)).catch((err:any) => console.error(err));
     }
 
     private async Post(method : string, options? : any){
@@ -44,6 +50,7 @@ export default class Telegram{
     }
 
     async sendMessage(options : SendMessageOptions){
+        
         return await this.Get('sendMessage', options)
     }
 

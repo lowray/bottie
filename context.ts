@@ -10,6 +10,8 @@ export default class Context{
     }
 
     async reply(data : any, options? : object){
+        console.log(data);
+        
         return await this.bot.telegram.sendMessage({
             chat_id : this.update[this.update.type].chat.id,
             text : data,
@@ -25,5 +27,7 @@ export default class Context{
             ...options
         })
     }
+
+    
 
 }
